@@ -7,8 +7,13 @@ The system will return a non-zero value if the command processor is available.
 
 2.	(5) Write a concise, complete English language description of the C++ provided function fflush(). Be thorough, but write just a few short phrases.
 
+fflush() will flush a steram. All data in the stream will be written to a file. It flushes the output buffer of a stream.. The symtax is int fflush(FILE *stream). 
+Zero is returned on success, EOF is return for an error. 
+
 3.	(5) Write a concise, complete English language description of the Linux command whoami. 
 Be thorough, but write only few lines. What do you observe executing WHOAMI on Windows?
+
+WHOAMI is the concatenation of the words "who", "am" and "I". This returns the effective username of the current user when invoked. 
 
 4.	(10) A C program may call its own main() function. 
 A C++ main() function may call its own main() function. 
