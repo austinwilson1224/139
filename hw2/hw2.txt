@@ -23,6 +23,8 @@ Explain, how your program avoids infinite regress. State a possible use for this
 I set a timer and check to see if it is larger than 3000 ms. The function will return 0 if it is. I would not design a language this way. Main should not be used recursively
 because main should only be called once. Recursion is a useful tool but not for main. 
 
-5.	(10) Write C++ program system1 that uses the “system()” library function; do #include <stdlib.h>. Implement calls to system() with arguments “ls”, “pwd”, and “whoami”. Show the source and program output. Describe briefly what you observe; with output similar to:
+5.	(10) Write C++ program system1 that uses the “system()” library function; do #include <stdlib.h>. Implement calls to system() with arguments “ls”, “pwd”, and “whoami”. 
+Show the source and program output. Describe briefly what you observe; with output similar to:
 
-6.	(20) Write C++ program system2 that uses command line parameters as program input. To prepare, read about argc, argv, and envp. A possible command to execute is:
+6.	(20) Write C++ program system2 that uses command line parameters as program input. To prepare, read about argc, argv, and envp. 
+A possible command to execute is: herberts-Air-2:~ herbertmayer$ ./a.out pwd ls whoami

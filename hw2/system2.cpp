@@ -2,37 +2,17 @@
  * g++ -o system2 system2.cpp
  * ./system2
  */
-
-using namespace std;
-
 #include <iostream>
 #include <string>
 
 int main(int argc, char *argv[]) {
+    std::cout << "argc = " << argc << std::endl;
 
-    string arguments[] = {"ls","pwd","whoami"};
-
-    cout << "next system command:" << endl;
-    system("ls");
-    cout << "\n";
-
-    cout << "next system command:" << endl;
-    system("pwd");
-    cout << "\n";
-
-    cout << "next system command:" << endl;
-    system("whoami");
-    cout << "\n";
-
-
-
-    cout << "\n\n\nOther way:\n";
-
-    int arraySize = sizeof(arguments) / sizeof(arguments[0]);
-
-    for(int i = 0; i < arraySize; i++) {
-        string temp = arguments[i];
-        cout << system(temp.c_str()) << endl;
+    for(int i = 1; i < argc; i++) {
+        std::cout << "argv[" << i << "] = " << argv[i] << std::endl;
+        std::cout << "Executing command '" << argv[i] << "'" << std::endl;
+        system(argv[i]);
+        std::cout << std::endl;
     }
     return 0;
 }
