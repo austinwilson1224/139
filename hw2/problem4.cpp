@@ -10,21 +10,26 @@
 using namespace std;
 
 int i = 0;
-int main(int argc, char *argv[]) {
+// int argc, char *argv[]
+int main(int x) {
     // clock_t t = clock();
     // if (t > 3000) {
     //     return 0;
     // }
     // cout << t << " ";
     // main();
+
+
     // return 0;
     // cout << argc << "\n\n";
 
-    if(argc > 10) {
+    if(x > 10) {
         return 0;
     }
 
-    std::cout << i;
-    main(i++, argv);
+    std::cout << " i = " << i << endl;
+
+    i++; 
+    main(i);
 }
 

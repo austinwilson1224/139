@@ -1,0 +1,152 @@
+General Rules: Create homework, compose specifications or any text by using a common document-creation tool, such as Microsoft® Word.
+
+Detailed hints: Refer to the wwweb or lecture notes for this class to answer the questions below. Be concise, complete, and precise.
+
+Summary: Design, implement, test, debug and document a stripped-down simulator for a demand-paged Virtual Memory Manager named vmm. Vmm assumes a 32-bit, byte-addressable architecture with 4 kB aligned page frames. Run your program with your own brief, well thought-out inputs, but also use the input provided here. Only submit inputs and outputs of your test runs, no program sources, not the traces you may have used in your own debugging!
+
+Abstract: Write a SW simulator of a Virtual Memory Manager named vmm. Vmm reads memory requests (AKA loads and stores) from stdin and simulates memory actions and page-related and timing aspects of memory accesses. Specifically, vmm measures the number of memory cycles of any such simulated input program. The supposed cycles for memory accesses are defined via constant numbers in this assignment; they are not varying dynamically as they would in a real, loaded run-time system. Implement vmm with three levels of 32-bit address mapping, using 10, 10 and 12 bits. Except for the Page Directory (PD) which is implemented as a dedicated 4 kB-size cache, vmm operates without any data cache. Accesses through the PD cost 1 cycle each.
+
+Track the exact number of cycles for each and for all memory accesses, also the number of cycles if no virtual memory mapping had been available. Track the number of page swap-ins, swap-outs, and all interesting demand paging related activities. Define the number of cycles for any swap operation to be fixed at 5000 cycles per swap; in reality this will vary from one disk access to another. A sample input and output is attached. In your implementation, generate a similar level of detail for your simulation output.
+
+Also output an additional text file solely for your own education –and to help you debug your code– that shows the state of the memory subsystem at each swap-in, swap-out, and other vmm-related paging activity. This file can become large when the system is thrashing. Make sure you do run a thrashing case. Do not turn in this file; it for your help in debugging.
+
+Detailed Requirements: Simulate vmm for a byte-addressable, 4-bytes per word architecture with 32 bit addresses. Your vmm uses demand paging. A page is 4 kB long, and 4 kB aligned. Write also a separate address-generating program to be used for your simulation inputs. Load- and store requests (in ASCII text form) are read by the simulator’s front-end (FE) and “executed” by the vmm proper.
+
+However (very important!), at the start of any simulation, the first input tuple P of information is the number of simulated page frames available; e.g. input p 9 indicates 9 physical page frames are available; no more. Whenever the data space needs for your program are larger than the number of physical frames (like in p 9), some page will be swapped out to disk during run-time. Careful, if the victim page is unmodified and already on disk, it can simply be overridden; no need to swap it out. Only user pages will be swapped out, not Page Tables. Of course, the PD being implemented as a HW cache is never swapped out.
+
+Use three levels of address mapping. Each 32-bit address is interpreted as a 10+10+12 bit string as follows: The leftmost (higher order) 10 bits of a logical address hold the index into the Page Directory PD.
+
+PD: The PD has is a 4 kB data structure implemented in HW, thus has space for 1024 pointers to Page Tables (PT). Only the PD is implemented as a (special-purpose) on-chip cache; there are no additional caches in this vmm system. Entries in the PD each are allotted exactly a single 4-byte word, i.e 32 bits; sufficient to hold the interesting 20 bits of a page address plus 12 bits for further VMM-related bookkeeping information.
+
+PT: The next 10 bits of a logical address moving to the right (from higher to lower order bits) specify the PT index. Both PD and PT indices of course are multiplied by 4 to compute a byte-offset from the start address of a table into the respective table entry. Caveat: if interpreted as (used as) an array index, there is no need to multiply by 4!
+
+User Page: Finally, the rightmost 12 bits of any logical address function as byte-offset into a user page. The start address of a user page is pointed to by the appropriate PT entry. For user page addresses, these 12-bit page offsets are NOT multiplied by 4 (or left-shifted by 2) in the simulated vmm.
+
+Replacement: If a page must be swapped out, use the Random Replacement Policy. Define some fixed, arbitrary, small number of simulated cycles for selecting the victim page. This constitutes a simplification vs. a real demand paged system that has to id a victim page.
+
+Note that only 20 address bits need to be stored in each of the 1024 PD and PT entries. While logical addresses are 32 bits long, pages are aligned on 4 K byte boundaries, thus the rightmost 12 bits of a page address are all 0. No need to store twelve zeros explicitly! Instad, the remaining 12 bits can be used for further book keeping information, such as the P bit (present), D bit (dirty; set if written, clear initially),  S bit for a shared page, and other data interesting about a page.
+
+Output: After each simulation run, vmm emits the complete execution statistics, including:
+
+*  *  *  Statistics you are expected to generate at the end of each run  *  *  *
+
+	number of memory accesses
+	number of swap ins
+	number of swap outs
+	total number of page frames allocated
+	number of pages used for page tables
+	number of pages used for user program
+	total number of memory cycles
+	total number of cycles if VM mapping had NOT taken place
+	number of cycles to do one swap-in operation (5000 per)
+	number of cycles to do one swap-out operation (5000 per)
+	number of cycles to access memory (10)
+	number of cycles to access the PD cache (1)
+	last working set size --cannot exceed physical page frames
+	maximum number of physical pages --is given as input must be > 1
+	size of one page (4 kB)
+	replacement method used
+	
+Required Input and resulting output: P x at the beginning of the input specifies the number x of physical page frames. Other input samples to the simulator: w x y defines that at address x the value y will be stored, i.e. written; in your actual simulation you ignore the y value. Tuple r x defines that memory address x is loaded into some register. Again ignore the actual x value, and the register into which it is loaded. Just simulate and track the timing.
+
+Sample Input, Required to be Exercised With 9 Page Frames:
+p     9
+w  1254    0  w  1250    4  w  2500    8  w  1252    7  w  2600    3
+w  2650    2  w  1260    0  w  2800    0  w   1268   0  w  2700    8
+w     0    1  r     0       r  1250       r  2500       w     0    0 
+r     0       r  1252       r  2550       w     0    0  r     0
+r  1254       r  2600       w     0    0  r     0       r  1256 
+r  2650       w     0    0  r     0       r  1258       r  2700
+w     0    0  r     0       r  1260       r  2750       w     0    0 
+r     0       r  1262       r  2800       w     0    0  r     0
+r  1264       r  2850       w     0    0  r     0       r  1266 
+r  2900       w     0    0  r     0       r  1268       r  2950
+r  3298       w     0 6048  r     0       r  2482       r  3348
+w     0 6528  r     0       r  2484       r  3398       w     0 7020 
+r     0       r  2486       r  3448       w     0 7524  r     0
+r  2488       r  3498       w     0 8040  r     0       r  2490 
+r  3548       w     0 8568  r     0       r  2492       r  3598
+w     0 9108  r     0       r  2494       r  3648       w     0 9660 
+r     0       r  2496       r  3698       w     0 10224 r     0
+r  2498       r  3748       w     0 10800 r     0       w  4998 10800
+
+
+Plausible Output for Some Other Simulation, not Related to Short Output Above:
+
+ * * * Paging Activity Statistics * * *
+  
+ number of memory accesses       = 64376 
+ number of triples (1 + access)  = 64377 
+ number of swap ins (faults)     = 0
+ number of swap outs             = 2
+ total number of pages malloced  = 10 
+ number of pages for Page Tables = 1
+ number of page frames for user  = 9
+ total memory cycles             = 1,287,500 
+ cycles w/o vmm                  =   643,750 
+ cycles per swap_in              = 5000 
+ cycles per swap_out             = 5000 
+ last working set size           = 8
+ max working set size ever       = 8
+ max physical pages              = 8
+ page size                       = 4096
+ replacement algorithm		   = random
+ Address range                   = . . .
+
+Sample Swap-Activity (Leading 0s not all shown):
+  
+  * * *  Done mallocing a new Page Table * * *
+  
+Dumping Page Directory:
+pd[0].v   = 0xdb40
+pd[0].lru = 2
+  
+Dumping Page Tables:
+Page Dir entry 0:
+  
+  * * *  Done mallocing a new page Malloc real Page * * *
+  
+Dumping Page Directory:
+pd[0].v   = 0xdb40
+pd[0].lru = 2
+  
+Dumping Page Tables:
+Page Dir entry 0:
+pt[0].v = 0x000eb48, lru = 2
+  
+  * * *  Done mallocing a new page Malloc real Page * * *
+  
+Dumping Page Directory:
+pd[0].v   = 0xdb40
+pd[0].lru = 2
+  
+Dumping Page Tables:
+Page Dir entry 0:
+pt[0].v = 0x000eb48, lru = 3, written 
+pt[2].v = 0x000fb50, lru = 4
+  
+  * * *  Done mallocing a new page Malloc real Page * * *
+  
+Dumping Page Directory:
+pd[0].v   = 0xdb40
+pd[0].lru = 2
+  
+Dumping Page Tables:
+Page Dir entry 0:
+pt[0].v = 0x000eb48, lru = 3, written 
+pt[2].v = 0x000fb50, lru = 4
+pt[4].v = 0x0010b58, lru = 5
+  
+  * * *  Done mallocing a new page Malloc real Page * * *
+  
+Dumping Page Directory:
+pd[0].v   = 0xdb40
+pd[0].lru = 2
+  
+Dumping Page Tables:
+Page Dir entry 0:
+pt[0].v = 0x000eb48, lru = 11, written 
+pt[2].v = 0x000fb50, lru = 12
+pt[4].v = 0x0010b58, lru = 9
+pt[5].v = 0x0011b60, lru = 13
+
