@@ -4,16 +4,16 @@
  */
 #include <iostream>
 #include <stdlib.h>
-//using namespace std;
+using namespace std;
 int main(int argc, char *argv[]) {
-    //cout << "next system command:" << endl;
+    cout << "next system command:" << endl;
     system("ls");
-    //cout << "\n";
-    //cout << "next system command:" << endl;
+    cout << endl;
+    cout << "next system command:" << endl;
     system("pwd");
-    //cout << "\n";
-    //cout << "next system command:" << endl;
+    cout << endl;
+    cout << "next system command:" << endl;
     system("whoami");
-    //cout << "\n";
+    cout << endl;
     return 0;
 }
