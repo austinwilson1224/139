@@ -614,8 +614,9 @@ void gen( )
         printf( "\n" );
 } //end gen
 
-int main( void )
+int main( int argc, char ** argv )
 { // main
+        //printf("%s",argv);
         printf( "If want larger matrix, change MAX. Now it is %d.\n", MAX );
         init();
 #       ifdef DEBUG
@@ -623,6 +624,7 @@ int main( void )
         print_all();
 #       endif
         gen();
+        statistics();
         return 0;
 } //end main
 

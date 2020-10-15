@@ -1,11 +1,16 @@
-General Rules: Create homework, compose specifications or any text by using a common document-creation tool, such as Microsoft® Word.
+General Rules: Create homework, compose specifications or any text by using a common 
+document-creation tool, such as Microsoft® Word.
 
-Detailed hints: Refer to the wwweb or lecture notes for this class to answer the questions below. Be concise, complete, and precise.
+Detailed hints: Refer to the wwweb or lecture notes for this class to answer the questions below. 
+Be concise, complete, and precise.
 
-Summary: Design, implement, test, debug and document a stripped-down simulator for a demand-paged Virtual Memory Manager named vmm. 
+Summary: Design, implement, test, debug and document a stripped-down simulator for a demand-paged
+ Virtual Memory Manager named vmm. 
 Vmm assumes a 32-bit, byte-addressable architecture with 4 kB aligned page frames. 
-Run your program with your own brief, well thought-out inputs, but also use the input provided here. 
-Only submit inputs and outputs of your test runs, no program sources, not the traces you may have used in your own debugging!
+Run your program with your own brief, well thought-out inputs, 
+but also use the input provided here. 
+Only submit inputs and outputs of your test runs, no program sources, 
+not the traces you may have used in your own debugging!
 
 
 
@@ -78,7 +83,12 @@ Output: After each simulation run, vmm emits the complete execution statistics, 
 	size of one page (4 kB)
 	replacement method used
 	
-Required Input and resulting output: P x at the beginning of the input specifies the number x of physical page frames. Other input samples to the simulator: w x y defines that at address x the value y will be stored, i.e. written; in your actual simulation you ignore the y value. Tuple r x defines that memory address x is loaded into some register. Again ignore the actual x value, and the register into which it is loaded. Just simulate and track the timing.
+Required Input and resulting output: P x at the beginning of the input specifies the number x of 
+physical page frames. Other input samples to the simulator: w x y defines that at address x 
+the value y will be stored, i.e. written; in your actual simulation you ignore the y value. 
+Tuple r x defines that memory address x is loaded into some register. 
+Again ignore the actual x value, and the register into which it is loaded. 
+Just simulate and track the timing.
 
 Sample Input, Required to be Exercised With 9 Page Frames:
 p     9
