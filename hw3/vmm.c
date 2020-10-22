@@ -55,7 +55,7 @@ typedef struct page_e_tp			// one single entry, need 1024
 typedef struct_page_e_tp page_tp[ P_SZ ];
 #define PAGE_SIZE sizeof( page_tp )
 
-typedef page_tp * page_ptr_tp;
+typedef page_tp * page_ptr_tp; // should be page_e_tp 
 
 page_tp pd;                                   /* Page Directory, yet uninitialized */
 
