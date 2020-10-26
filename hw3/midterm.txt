@@ -1,0 +1,14 @@
+Rules for Midterm 1: 150 points; work alone and independently, no use of phone or internet; closed books, closed notes. You may use one regular-sized sheet of notes. Write your name on every separate sheet. Numbers below in parentheses indicate credit points; e.g. 3. (10) means: problem 3 yields 10 points max. Answer via short phrases, no need for full sentences. 
+1. (10) Describe 4 main goals and purposes of an OS. 
+2. (10) How does an OS become active on a powered-down computer? The OS includes a loader to move object programs into memory; yet how does OS itself get moved into memory? 
+3. (10) Describe precisely the essence and function of Direct Memory Access (DMA). 4. (10) What does “privileged mode” execution mean in an OS? 
+5. (10) Processes run concurrently, sharing resources, such as memory. How can the OS prevent one process from accessing memory space of another process? 
+6. (10) Briefly sketch demand paged Virtual Memory Management. Explain demand, paged, virtual, page-size, page alignment. Contrast with physical memory. 
+7. (10) Argue whether VMM is a needed SWE technique, given that memory is cheap. 8. (10) Explain program and process. What are key differences between the two? 
+9. (10) Give an example for a hard real-time problem. What makes it real-time? What makes it hard? 
+10. (10) Outline the storage hierarchy of a Computer System; list from high-to-low levels. 
+11. (10) Devices such as keyboard, printer, are part of a computer system. How do they receive and communicate key information to and from the OS? 
+12. (10) List and explain in a short phrase each various physical and program-related parameters of mass-storage components. What are mass storage components of a computer? 
+13. (10) Argue, whether it is “fair” that some process p is not currently running, though p has all resources (except the CPU) needed to execute. 
+14. (10) List process-related responsibilities of a multi-user, time-sharing OS. 
+15. (10) Explain the various size-limits and performance metrics of different HW storage media, from fastest to slowest. Characterize performance broadly by units per second.
