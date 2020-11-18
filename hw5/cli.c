@@ -1,16 +1,12 @@
-/*
-Austin Wilson
-CSC 139
-Herbert Mayer
-*/
+//Austin Wilson
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define MAX     1000    //arbitrary length of 1 buffer for a line
 #define LENGTH  15
-#define USAGE( str ) printf( "%s", str );    \
+#define USAGE( str ) printf( "%s ", str );    \
         for (i = 0; cmds[i]; i++) {             \
-                printf( "%s", cmds[i]);         \
+                printf( "%s ", cmds[i]);         \
         };                                      \
         printf( "\n" );
 char buff[MAX];    //string buffer for 1 line
@@ -28,16 +24,13 @@ int main(int argc, char* argv[])
     USAGE("Legal commands: ");
     printf(" %d strings passed to argv[]\n", argc);
     while (--argc) {
-        printf("%d\n",count);
-        printf("%i\n",argc);
         count++;
         printf("next string is '%s'\n", argv[count]);
         strcat(buff, argv[count]);
         strcat(buff, "; ");
         printf("new string is '%s'\n", buff);
-
     }//end while
-    if (count != 0) {
+    if (count) {
         //there was a Unix command, beyond a.out or cli
         i = 0;  //search for all cmds[][], start with cmds[0][]
         while (cmds[i]) {

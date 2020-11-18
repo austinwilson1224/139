@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 {
         //main
         int i, count=0;
-        //buff[0] = '0';
+        buff[0] = '0';
         printf("My cli 2020\n");
         printf("Commands supported: ");
         printf("%d strings passed to argv[]\n", argc);

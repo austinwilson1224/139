@@ -1,0 +1,5 @@
+python3 hw5.py pwd
+python3 hw5.py ls –la
+python3 hw5.py rm a.out, gcc sys.c, cp a.out cli
+python3 hw5.py rm -f test.txt, mv other.c ../temp
+
